@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "Mayfly",
+    "slug": "mayfly",
+    "version": "3.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "de.paul42.mayfly",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Mayfly needs camera access to take photos and videos to send to friends.",
+        "NSMicrophoneUsageDescription": "Mayfly needs microphone access to record video."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "package": "de.paul42.mayfly",
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO"
+      ]
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Mayfly needs camera access to take photos and videos.",
+          "microphonePermission": "Mayfly needs microphone access to record video.",
+          "recordAudioAndroid": true
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Mayfly needs microphone access to record video."
+        }
+      ]
+    ]
+  }
+}
