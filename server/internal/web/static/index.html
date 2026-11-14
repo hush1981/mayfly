@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<title>Mayfly</title>
+<meta name="description" content="Mayfly – Momente verschicken, ohne dass der Server mitliest. Ende-zu-Ende-verschlüsselt, nach 24 Stunden gelöscht, ohne Google-Dienste.">
+<link rel="icon" type="image/png" href="/site/icon-64.png">
+<link rel="stylesheet" href="/site/site.css">
+<script src="/site/qrcode.js" defer></script>
+<script src="/site/site.js" defer></script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/"><img src="/site/icon-64.png" alt="" width="28" height="28"><span>Mayfly</span></a>
+    <nav><a href="#funktionen">Funktionen</a><a href="#installieren">Installieren</a>{{if .FriendQR}}<a href="#code">Dev-Code</a>{{end}}<a href="#datenschutz">Datenschutz</a><a href="#faq">FAQ</a><a href="https://github.com/hush1981/mayfly" rel="noopener">GitHub</a></nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <p class="eyebrow">Android · Ende-zu-Ende verschlüsselt · selbst gehostet</p>
+      <h1>Momente verschicken, ohne dass der Server mitliest.</h1>
+      <p class="lead">Mayfly ist ein Messenger für Fotos, Videos und kurze Texte. Alles wird auf deinem Handy verschlüsselt, der Server sieht nur unlesbare Daten und löscht sie nach 24&nbsp;Stunden.</p>
+      <div class="cta">
+        <a class="btn primary" href="#installieren">Installieren</a>
+        <a class="btn" href="/download">APK laden{{if .Version}} · {{.Version}}{{end}}</a>
+      </div>
+    </div>
+    <img class="hero-icon" src="/site/icon-192.png" alt="Mayfly-Icon" width="160" height="160">
+  </div>
+</section>
+
+<section id="funktionen" class="wrap">
+  <h2>Was Mayfly kann</h2>
+  <div class="grid">
+    <article class="card"><h3>Ende-zu-Ende verschlüsselt</h3><p>Momente, Bildtexte, Nachrichten und Lesebestätigungen werden mit dem Schlüssel des Empfängers verschlüsselt. Nur ihr beide könnt sie öffnen.</p></article>
+    <article class="card"><h3>Forward Secrecy</h3><p>Jede Nachricht bekommt einen eigenen Schlüssel, der nach dem Lesen gelöscht wird (Double Ratchet wie bei Signal). Selbst wer später an deinen Schlüssel kommt, kann alte Nachrichten nicht mehr entschlüsseln.</p></article>
+    <article class="card"><h3>Sealed Sender</h3><p>Zwischen Freunden sieht der Server nicht mehr, wer etwas geschickt hat: Zugestellt wird mit einem geheimen Zustell-Schlüssel des Empfängers, der Absender steht nur verschlüsselt drin. Der Server erfährt nur, an wen es geht.</p></article>
+    <article class="card"><h3>Anrufe und Videoanrufe</h3><p>Zu zweit oder in der Gruppe mit bis zu 8 Leuten, Ende-zu-Ende-verschlüsselt (WebRTC). Standardmäßig laufen Anrufe über das Relay des Servers, damit dein Freund deine IP-Adresse nicht sieht. Das Relay leitet nur verschlüsselte Daten weiter.</p></article>
+    <article class="card"><h3>Stories für ausgewählte Freunde</h3><p>Eine Story ist 24&nbsp;Stunden sichtbar, und nur für die Freunde, die du auswählst. Antworten darauf landen in eurem Chat. Du siehst, wer sie angeschaut hat.</p></article>
+    <article class="card"><h3>Gruppenchats</h3><p>Gemeinsamer Chat mit Texten, Momenten, Sprachnachrichten, Gruppenanrufen und @-Erwähnungen. Wer eingeladen wird, muss erst zustimmen. Name und Bild darf jeder ändern; was jemand speichert, bleibt für alle gespeichert.</p></article>
+    <article class="card"><h3>Nach 24 Stunden weg</h3><p>Der Server löscht Momente nach dem Ansehen, spätestens nach 24&nbsp;Stunden. Nachrichten verschwinden direkt nach dem Ansehen oder 6, 12 oder 24&nbsp;Stunden nach dem Senden, je nachdem, was ihr im Chat einstellt.</p></article>
+    <article class="card"><h3>Einmal ansehen, einmal wiederholen</h3><p>Jeder Moment lässt sich einmal öffnen und genau einmal erneut ansehen. Die Wiederholung wird im Chat angezeigt. Wie lange ein Foto zu sehen ist, legst du beim Senden fest.</p></article>
+    <article class="card"><h3>Im Chat speichern</h3><p>Wichtige Momente und Nachrichten kannst du im Chat behalten. Gespeicherte Momente siehst du direkt im Chat. Gespeichert wird nur auf deinem Handy, verschlüsselt.</p></article>
+    <article class="card"><h3>Kamera und Bearbeiten</h3><p>Dual-Kamera (vorne und hinten gleichzeitig), Blitz, Selbstauslöser und Raster. Farbfilter per Wischen, Uhrzeit-Stempel, Malen, Emoji-Sticker, Text in drei Stilen und Links. Videos ohne Ton oder mit 0,5×/2× Tempo. Alles passiert auf dem Handy; speichern in der eigenen Galerie geht auch. Fotos und Videos gehen auch aus der Galerie.</p></article>
+    <article class="card"><h3>Chatten wie gewohnt</h3><p>Texte und Sprachnachrichten, Antworten per Text oder Moment, Reaktionen, Bearbeiten und Zurückziehen. Chats lassen sich anheften und stummschalten, Stories einzelner Freunde ausblenden, Freunde bekommen Spitznamen, die nur du siehst.</p></article>
+    <article class="card"><h3>Blockieren und Ruhe</h3><p>Blockierte Personen können dir nichts mehr schicken und dich nicht mehr finden. Während ein Moment oder Chat offen ist, sind Screenshots gesperrt.</p></article>
+    <article class="card"><h3>Freunde per QR-Code</h3><p>Freunde fügst du über ihren QR-Code hinzu. Mit einem zweiten Code prüft ihr, dass niemand zwischen euch sitzt.</p></article>
+    <article class="card"><h3>Ohne Google</h3><p>Keine Play-Dienste, keine Tracker, keine Werbung. Benachrichtigungen kommen über UnifiedPush, zum Beispiel mit ntfy.</p></article>
+  </div>
+  <p class="note">Videos bis 30&nbsp;Sekunden. Neben Gruppenchats gibt es Rundlisten: ein Moment geht einzeln an jeden auf der Liste. Beste Freunde (die 8 Leute, mit denen du am meisten Kontakt hast) zählt nur dein Handy. Design wahlweise schwarz (Standard, spart Akku bei OLED), dunkelgrau oder weiß. Videos kannst du freihändig aufnehmen: Auslöser halten und aufs Schloss schieben. Am Geburtstag zeigt Mayfly deinen Freunden ein 🎂, wenn du das einschaltest. Gibt es eine neue Version, sagt dir die App Bescheid. Die App spricht Deutsch und Englisch. Was es bewusst nicht gibt, steht in den <a href="#faq">Fragen &amp; Antworten</a>.</p>
+</section>
+
+<section id="installieren" class="wrap">
+  <h2>Installieren</h2>
+  <p class="sub">Am Computer: Codes mit dem Handy scannen. Am Handy: einfach auf die Knöpfe tippen.</p>
+
+  <ol class="steps">
+    <li class="step">
+      <div class="step-text">
+        <h3><span class="num">1</span>F-Droid installieren</h3>
+        <p>F-Droid ist ein freier App-Store für Android. Über ihn bekommst du Mayfly und alle Updates.</p>
+        <div class="links">
+          <a class="btn" href="https://f-droid.org/" rel="noopener">f-droid.org</a>
+        </div>
+        <p class="small">Schon installiert? Dann direkt weiter.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-text">
+        <h3><span class="num">2</span>Paketquelle hinzufügen</h3>
+        <p>Code in F-Droid scannen (Einstellungen → Paketquellen → <b>+</b>) oder am Handy auf den Knopf tippen.</p>
+        <div class="links">
+          <a class="btn primary" href="{{.RepoDeepURL}}">In F-Droid öffnen</a>
+          <a class="btn" href="{{.RepoAddURL}}" rel="noopener">Link zur Paketquelle</a>
+        </div>
+        <details class="fp"><summary>Fingerabdruck prüfen</summary>
+          <p class="small">F-Droid zeigt beim Hinzufügen den Fingerabdruck des Signaturschlüssels. Er muss so lauten:</p>
+          <code>{{.Fingerprint}}</code>
+        </details>
+      </div>
+      <figure class="qr" data-qr="{{.RepoAddURL}}"><figcaption>F-Droid-Paketquelle</figcaption></figure>
+    </li>
+
+    <li class="step">
+      <div class="step-text">
+        <h3><span class="num">3</span>Mayfly installieren</h3>
+        <p>In F-Droid nach <b>Mayfly</b> suchen und installieren. Wenn F-Droid die App nicht sofort findet, die Liste kurz nach unten ziehen.</p>
+        <div class="links">
+          <a class="btn primary" href="market://details?id={{.AppID}}">In F-Droid öffnen</a>
+          <a class="btn" href="/download">APK direkt laden{{if .Version}} · {{.Version}}{{end}}</a>
+        </div>
+        <p class="small">Die APK ist dieselbe wie in F-Droid. Updates kommen aber nur über F-Droid automatisch.</p>
+      </div>
+      <figure class="qr" data-qr="/download"><figcaption>Mayfly-APK</figcaption></figure>
+    </li>
+
+    <li class="step">
+      <div class="step-text">
+        <h3><span class="num">4</span>ntfy für Benachrichtigungen</h3>
+        <p>Optional, aber empfohlen. ntfy weckt Mayfly nur auf, die Benachrichtigung zeigt Mayfly selbst. ntfy erfährt dabei nicht, wer dir geschrieben hat.</p>
+        <div class="links">
+          <a class="btn primary" href="https://f-droid.org/packages/io.heckel.ntfy/" rel="noopener">ntfy bei F-Droid</a>
+          <a class="btn" href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" rel="noopener">Google Play</a>
+        </div>
+        <p class="small">ntfy nach der Installation einmal öffnen. Dann in Mayfly unter <i>Profil → Push-Benachrichtigungen</i> ntfy auswählen.</p>
+      </div>
+      <figure class="qr" data-qr="https://f-droid.org/packages/io.heckel.ntfy/"><figcaption>ntfy bei F-Droid</figcaption></figure>
+    </li>
+
+    <li class="step">
+      <div class="step-text">
+        <h3><span class="num">5</span>Loslegen</h3>
+        <p>Konto anlegen, der Server <code>mayfly.paul42.de</code> ist schon eingestellt. Ihr fügt euch unter <i>Freunde → Mein Code / Scannen</i> gegenseitig hinzu. Danach im Chat über das Schild-Symbol verifizieren.</p>
+        <p class="small">Die App gibt es auf Deutsch und Englisch, sie richtet sich nach der Sprache deines Handys (umstellbar im Profil).</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+{{if .FriendQR}}<section id="code" class="wrap">
+  <h2>Dev-Code: den Entwickler hinzufügen</h2>
+  <div class="step friend">
+    <div class="step-text">
+      <p>Das ist der Mayfly-Code des Entwicklers (<b>{{.FriendName}}</b>). Für Fragen, Fehler und Ideen. In Mayfly unter <i>Freunde → Scannen → Kamera</i> scannen. Auf dem Handy: Screenshot machen und <i>Freunde → Scannen → Aus Bild</i> wählen.</p>
+      <p class="small">Der Code enthält seinen öffentlichen Schlüssel. Wer ihn scannt, hat den Chat gleich verifiziert. Eine Handy-Kamera-App zeigt nur Text an, nur Mayfly selbst kann den Code lesen.</p>
+    </div>
+    <figure class="qr show" data-qr-raw="{{.FriendQR}}"><figcaption>Dev-Code: {{.FriendName}}</figcaption></figure>
+  </div>
+</section>
+
+{{end}}<section id="datenschutz" class="wrap">
+  <h2>Was der Server weiß und was nicht</h2>
+  <div class="split">
+    <div class="card">
+      <h3 class="no">Sieht er nicht</h3>
+      <ul>
+        <li>Inhalt von Fotos, Videos, Bildtexten und Nachrichten</li>
+        <li>Ob du etwas gespeichert oder ein zweites Mal angesehen hast, und wer welche Story angeschaut hat</li>
+        <li>Deinen Chatverlauf, der liegt nur auf deinem Handy</li>
+        <li>Was in Reaktionen, Antworten und Lesebestätigungen steht</li>
+        <li>Spitznamen, stummgeschaltete Chats, deine besten Freunde und deinen Geburtstag</li>
+        <li>Telefonnummer, E-Mail oder Adressbuch, danach fragt Mayfly nie</li>
+        <li>Wer dir etwas schickt, wenn ihr befreundet seid (Sealed Sender)</li>
+        <li>Was in Anrufen gesagt oder gezeigt wird</li>
+        <li>IP-Adressen, die werden nicht protokolliert</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="yes">Muss er wissen</h3>
+      <ul>
+        <li>Benutzername, Profilbild und öffentlicher Schlüssel</li>
+        <li>Passwort, nur als Argon2id-Hash</li>
+        <li>Wer mit wem befreundet ist, wer in welcher Gruppe ist, und wen du blockiert hast</li>
+        <li>Dass du eine Story gepostet hast und für welche Freunde sie freigegeben ist (nicht, was drin ist)</li>
+        <li>An wen wann etwas geht, wie groß es ungefähr ist und ob es Foto, Video oder Sprachnachricht ist. Den Absender sieht er nur in Gruppenchats und bei Stories, und solange ein Freund noch eine ältere App-Version hat</li>
+        <li>Bei Anrufen über das Relay: dass zwei Geräte verschlüsselte Daten austauschen, ihre IP-Adressen und die Datenmenge</li>
+        <li>Dass ein Moment geöffnet wurde, damit er gelöscht werden kann</li>
+        <li>Die Push-Adresse deines Verteilers (z.&nbsp;B. ntfy)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">Alles Weitere, auch Speicherdauer und deine Rechte, steht in der <a href="/datenschutz">Datenschutzerklärung</a>.</p>
+  <p class="note">Damit niemand Nachrichten fälschen kann, nicht einmal der Server, ist jede Nachricht an Absender und Empfänger gebunden. Doppelt zugestellte oder alte Nachrichten lehnt die App ab. Ändert sich der Schlüssel eines Freundes, sendet und empfängt die App für diesen Chat nichts mehr, bis du den neuen Schlüssel prüfst oder bestätigst – so kann auch ein kompromittierter Server nicht unbemerkt mitlesen. Mit Forward Secrecy hat jede Nachricht einen eigenen, danach gelöschten Schlüssel; Freunde mit älteren App-Versionen bekommen Nachrichten noch im alten Verfahren, bis sie aktualisieren. In Gruppen wird jede Nachricht für jedes Mitglied einzeln verschlüsselt; wer neu dazukommt, steht im Chat.</p>
+</section>
+
+<section id="selfhosting" class="wrap">
+  <h2>Eigenen Server betreiben</h2>
+  <h3>Grenzen dieses Servers</h3>
+  <ul class="limits">
+    <li>Höchstens <b>100 ungeöffnete Momente</b> pro Person gleichzeitig unterwegs, in einem Gruppenchat höchstens <b>200</b>.</li>
+    <li>Für eine Person warten höchstens <b>200 ungeöffnete Momente</b> und <b>500 Nachrichten</b>, davon höchstens <b>100 von einem Absender</b> – darüber fallen dessen eigene älteste weg, nie die von anderen.</li>
+    <li>Aktive Stories einer Person zusammen höchstens <b>300&nbsp;MB</b>.</li>
+    <li>Gruppen mit höchstens <b>64 Mitgliedern</b> (Einladungen mitgezählt).</li>
+    <li>Momente, Stories und Nachrichten liegen höchstens <b>24&nbsp;Stunden</b> auf dem Server.</li>
+    <li>Anrufe über das Relay: höchstens <b>4&nbsp;Mbit/s</b> pro Verbindung.</li>
+    <li>Wird der Speicherplatz knapp (weniger als 1&nbsp;GB frei), nimmt der Server keine neuen Momente an, bis wieder Platz ist.</li>
+  </ul>
+  <p class="small">Die Grenzen stehen auch in der App unter <i>Profil → Grenzen dieses Servers</i>.</p>
+  <p>Dieser Server wird geteilt und hat deshalb Grenzen, wie viel jede Person senden kann. Mayfly lässt sich auch auf einem eigenen Server betreiben: PostgreSQL und der Mayfly-Server laufen per Docker Compose hinter einem HTTPS-Reverse-Proxy. In der App trägst du beim Anmelden unter <i>Server</i> die eigene Adresse ein. Die Anleitung steht im <a href="https://github.com/hush1981/mayfly#readme" rel="noopener">README des Projekts auf GitHub</a>; melde dich über den <a href="#code">Dev-Code</a>, wenn du loslegen willst.</p>
+  <p class="small">Der Server hier kostet Strom und Zeit. Wenn dir Mayfly gefällt:</p>
+  <p><a class="btn beer" href="https://buymeacoffee.com/cough5647" rel="noopener">🍺 Sponsor me a beer</a></p>
+</section>
+
+<section id="faq" class="wrap">
+  <h2>Fragen &amp; Antworten</h2>
+  <p class="sub">Auf eine Frage tippen, um die Antwort zu sehen.</p>
+  <div class="faq">
+    <details>
+      <summary>Welche Funktionen wird es nicht geben?</summary>
+      <p>Einige bekannte Funktionen ähnlicher Apps kommen bewusst nicht in Mayfly, vor allem weil sie nicht zum Datenschutz passen:</p>
+      <ul>
+        <li><b>Karte mit Standorten von Freunden.</b> Der Server müsste wissen, wo du bist.</li>
+        <li><b>Memories,</b> also ein Archiv deiner Momente in der Cloud. Momente sollen den Server nach spätestens 24&nbsp;Stunden verlassen haben.</li>
+        <li><b>Feed mit Kurzvideos und öffentlichen Stories.</b> Mayfly ist für Freunde, nicht für Reichweite. Stories gibt es nur für Freunde, die du auswählst.</li>
+        <li><b>Flammen-Serien, Freundschafts-Emojis, Punktestände</b> und Ähnliches. Dafür müsste der Server zählen, wer wie oft mit wem schreibt. Außerdem sollen solche Mechaniken vor allem süchtig machen.</li>
+        <li><b>Quick Add, Kontakte-Abgleich und öffentliche Benutzersuche.</b> Niemand soll dich finden, dem du deinen Namen oder Code nicht selbst gegeben hast.</li>
+        <li><b>Live-Standort, Online-Status und „schreibt gerade…“.</b> Wann und wo du bist, geht niemanden etwas an.</li>
+        <li><b>Anzeigenamen und Benutzernamen ändern.</b> Freunde kennen dich über deinen Benutzernamen und deinen Schlüssel; ein zweiter, frei wählbarer Name würde Verwechslungen und Täuschungen leichter machen. Eigene Spitznamen für Freunde gibt es.</li>
+        <li><b>Geteilte Stories,</b> in die mehrere Leute gemeinsam posten. Stories bleiben persönlich und gehen nur an die Freunde, die du auswählst.</li>
+        <li><b>Lenses (Gesichtseffekte).</b> Dafür bräuchte es Gesichtserkennung über Googles ML Kit oder ein großes eigenes Modell.</li>
+        <li><b>Nachtmodus für die Kamera.</b> Den gibt es auf Android nur über herstellerspezifische Kamera-Erweiterungen, die auf jedem Handy anders oder gar nicht vorhanden sind. Der Aufwand lohnt sich nicht.</li>
+        <li><b>KI-Chatbot, Cloud-Übersetzung, Bitmoji-Avatare.</b> Dafür müssten deine Inhalte zu fremden Diensten.</li>
+        <li><b>Sounds und Musik, Sticker-Bibliotheken, Abos, Spiele</b> und ähnliches Beiwerk. Emoji-Sticker auf Momenten gibt es.</li>
+        <li><b>Gerätewechsel mit Verlauf.</b> Der Verlauf bleibt auf dem alten Handy.</li>
+        <li><b>Eine Option, Screenshots zu erlauben.</b> In offenen Momenten und Chats sind sie immer gesperrt.</li>
+        <li><b>Mehrere Geräte pro Konto.</b> Dein Schlüssel bleibt auf genau einem Handy.</li>
+        <li><b>Melden und Moderation.</b> Niemand liest mit, also kann auch niemand moderieren. Gegen Ärger hilft Blockieren.</li>
+      </ul>
+    </details>
+    <details>
+      <summary>Gibt es Mayfly für das iPhone?</summary>
+      <p>Nein, im Moment nur für Android. Technisch wäre eine iPhone-Version möglich, sie wurde aber nie gebaut oder getestet.</p>
+    </details>
+    <details>
+      <summary>Warum F-Droid und nicht Google Play?</summary>
+      <p>Mayfly kommt ganz ohne Google-Dienste aus. Über die eigene F-Droid-Paketquelle gibt es signierte Versionen und automatische Updates, ohne Google-Konto. Die Paketquelle prüft den Signaturschlüssel, deshalb kann niemand ein gefälschtes Update unterschieben.</p>
+    </details>
+    <details>
+      <summary>Kann der Empfänger Screenshots machen?</summary>
+      <p>Während ein Moment oder ein Chat offen ist, blockiert Mayfly Screenshots und Bildschirmaufnahmen. Gegen ein zweites Handy, das den Bildschirm abfotografiert, hilft aber keine App. Schick also nur, was du der Person auch anvertrauen würdest.</p>
+    </details>
+    <details>
+      <summary>Ich bekomme keine Benachrichtigungen.</summary>
+      <p>Installiere ntfy und öffne es nach der Installation einmal. Wähle dann in Mayfly unter <i>Profil → Push-Benachrichtigungen</i> ntfy aus. Wenn es trotzdem hakt, nimm ntfy in den Android-Einstellungen von der Akku-Optimierung aus. Ohne ntfy schaut Mayfly nur etwa alle 15&nbsp;Minuten nach neuen Momenten. Für stummgeschaltete Chats kommt absichtlich keine Benachrichtigung. Der öffentliche Dienst ntfy.sh sieht nur, wann ein leerer Weckruf kommt, und deine IP-Adresse; wer das nicht möchte, trägt in der ntfy-App einen eigenen ntfy-Server ein.</p>
+    </details>
+    <details>
+      <summary>Was passiert, wenn ich das Handy wechsle oder verliere?</summary>
+      <p>Dein Chatverlauf und dein privater Schlüssel liegen nur auf dem alten Handy. Auf einem neuen Gerät legt Mayfly beim Anmelden einen neuen Schlüssel an. Dabei geht der alte Verlauf verloren, und deine Freunde sehen einen Hinweis, dass sich dein Schlüssel geändert hat. Verifiziert euch danach am besten neu. Ein Konto kann immer nur auf einem Gerät gleichzeitig benutzt werden.</p>
+    </details>
+    <details>
+      <summary>Ich habe mein Passwort vergessen.</summary>
+      <p>Mayfly fragt nie nach einer E-Mail-Adresse, deshalb gibt es kein Zurücksetzen per Link. Melde dich beim Entwickler. Dein Passwort änderst du selbst unter <i>Profil</i>, dabei werden alle anderen Sitzungen abgemeldet.</p>
+    </details>
+    <details>
+      <summary>Wie lösche ich mein Konto?</summary>
+      <p>Unter <i>Profil → Konto löschen</i>. Konto, Freundschaften und noch nicht abgeholte Momente werden sofort vom Server gelöscht.</p>
+    </details>
+    <details>
+      <summary>Was kostet Mayfly?</summary>
+      <p>Nichts. Es gibt keine Werbung, keine Abos und keine Tracker.</p>
+    </details>
+    <details>
+      <summary>Wer hat Mayfly gebaut?</summary>
+      <p>Ehrlich gesagt: zum größten Teil eine KI. Der Code wurde fast vollständig von Claude (einem KI-Modell von Anthropic) geschrieben. Ich bin kein Softwareentwickler. Ziele, Umfang und Entscheidungen kamen von mir, und ich habe App und Server selbst getestet. Ein professionelles Sicherheits-Audit gab es bisher nicht.</p>
+      <p><b>Meine Rolle:</b> Ich betreibe und administriere den Mayfly-Server und die F-Droid-Paketquelle, also Hosting, Updates und die Veröffentlichung neuer Versionen.</p>
+      <p>Hinweise auf Fehler und Verbesserungen sind sehr willkommen, gern über den <a href="#code">Dev-Code</a>. Und wenn jemand Lust hat, die Weiterentwicklung zu übernehmen und sich durch ein KI-Projekt zu arbeiten: Server und Paketquelle administriere ich gern weiter.</p>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer class="wrap foot">
+  <p>Diese Seite nutzt keine Cookies, kein Tracking und lädt nichts von fremden Servern.</p>
+  <p><a href="https://github.com/hush1981/mayfly" rel="noopener">Quellcode auf GitHub</a> · <a href="/datenschutz">Datenschutzerklärung</a> · <a href="https://imprint.paul42.de/" rel="noopener">Impressum</a></p>
+</footer>
+</body>
+</html>

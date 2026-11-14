@@ -1,0 +1,150 @@
+# Secrets come from a .env file next to this file (chmod 600, never committed):
+#   POSTGRES_PASSWORD=<openssl rand -hex 24>
+#   JWT_SECRET=<openssl rand -hex 32>
+# Calls (optional) need the TURN relay below:
+#   COMPOSE_PROFILES=calls
+#   TURN_SECRET=<openssl rand -hex 32>
+#   TURN_URLS=turn:turn.example.org:3478?transport=udp,turn:turn.example.org:3478?transport=tcp
+#   TURN_EXTERNAL_IP=<public IP>/<this host's LAN IP>   (or just the public IP without NAT)
+#   TURN_RELAY_IP=<this host's LAN IP>
+# and the firewall must forward 3478/udp+tcp and 49160-49200/udp to this host.
+# The relay may send to this host's own address (two phones that both use the relay meet
+# there), so no other UDP service should listen on TURN_RELAY_IP — or firewall it.
+name: mayfly
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options: { max-size: "5m", max-file: "2" }
+    environment:
+      POSTGRES_DB: mayfly
+      POSTGRES_USER: mayfly
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mayfly"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    # no published ports: only reachable from the server container
+
+  server:
+    build: ./server
+    image: mayfly-server:latest
+    restart: unless-stopped
+    labels:
+      # locally built image, nothing to pull — keep watchtower away from it
+      com.centurylinklabs.watchtower.enable: "false"
+    ports:
+      # BIND_ADDR: the address the reverse proxy reaches (default: all). The API speaks plain
+      # HTTP, so only the TLS-terminating proxy should be able to connect — bind it to one
+      # address and/or firewall the port.
+      - "${BIND_ADDR:-0.0.0.0}:8080:8080"
+    environment:
+      DATABASE_URL: postgres://mayfly:${POSTGRES_PASSWORD}@postgres:5432/mayfly
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env}
+      STORAGE_PATH: /data/media
+      # optional: account whose "add me" QR code the landing page shows
+      SITE_FRIEND_USER: ${SITE_FRIEND_USER:-}
+      # reverse proxy allowed to set X-Forwarded-For (IP/CIDR list); empty = any private network
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-}
+      # limits (defaults: 100 unopened moments per sender, 200 waiting per recipient, 200 unopened
+      # per group chat, 300 MB of stories per person, keep 1024 MB disk free); GET /limits shows them
+      MEDIA_MAX_PENDING_PER_SENDER: ${MEDIA_MAX_PENDING_PER_SENDER:-}
+      MEDIA_MAX_PENDING_PER_RECIPIENT: ${MEDIA_MAX_PENDING_PER_RECIPIENT:-}
+      MEDIA_MAX_PENDING_PER_GROUP: ${MEDIA_MAX_PENDING_PER_GROUP:-}
+      STORY_MAX_MB: ${STORY_MAX_MB:-}
+      MEDIA_MIN_FREE_MB: ${MEDIA_MIN_FREE_MB:-}
+      # calls: TURN relay (see the turn service); without these the app says calls are unavailable
+      TURN_URLS: ${TURN_URLS:-}
+      TURN_SECRET: ${TURN_SECRET:-}
+      GOMEMLIMIT: 600MiB
+    # short log retention (logs contain only method, route pattern, status, latency)
+    logging:
+      driver: json-file
+      options: { max-size: "5m", max-file: "2" }
+    volumes:
+      - mediadata:/data/media
+    read_only: true
+    # uploads are spooled to the media volume; /tmp only needs to exist
+    tmpfs:
+      - /tmp:size=16m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    # a runaway server must not take the database down with it
+    mem_limit: ${SERVER_MEM_LIMIT:-768m}
+    pids_limit: 256
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # TURN relay for calls (coturn). Only forwards encrypted WebRTC packets; credentials are
+  # short-lived HMACs the Mayfly server hands out to logged-in users (use-auth-secret).
+  # Relaying to private networks is denied (no SSRF into the LAN), except to itself.
+  turn:
+    image: coturn/coturn:4.7.0
+    profiles: ["calls"]
+    restart: unless-stopped
+    network_mode: host
+    # runs as "nobody" without any capability (the image's binary only asks for the right to
+    # bind low ports, which stays in the bounding set but is never used), read-only
+    read_only: true
+    tmpfs:
+      - /var/lib/coturn
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    pids_limit: 256
+    logging:
+      driver: json-file
+      options: { max-size: "5m", max-file: "2" }
+    command:
+      - -n
+      - --log-file=stdout
+      - --simple-log
+      - --listening-port=3478
+      - --min-port=49160
+      - --max-port=49200
+      - --fingerprint
+      - --use-auth-secret
+      - --static-auth-secret=${TURN_SECRET:-}
+      - --realm=mayfly
+      - --external-ip=${TURN_EXTERNAL_IP:-}
+      - --listening-ip=${TURN_RELAY_IP:-}
+      - --relay-ip=${TURN_RELAY_IP:-}
+      - --no-tls
+      - --no-dtls
+      - --no-cli
+      - --no-tcp-relay
+      - --no-multicast-peers
+      - --stale-nonce=600
+      - --user-quota=12
+      - --total-quota=300
+      - --max-bps=4000000
+      - --denied-peer-ip=0.0.0.0-0.255.255.255
+      - --denied-peer-ip=10.0.0.0-10.255.255.255
+      - --denied-peer-ip=100.64.0.0-100.127.255.255
+      - --denied-peer-ip=127.0.0.0-127.255.255.255
+      - --denied-peer-ip=169.254.0.0-169.254.255.255
+      - --denied-peer-ip=172.16.0.0-172.31.255.255
+      - --denied-peer-ip=192.168.0.0-192.168.255.255
+      - --denied-peer-ip=192.0.0.0-192.0.0.255
+      - --denied-peer-ip=198.18.0.0-198.19.255.255
+      - --denied-peer-ip=224.0.0.0-255.255.255.255
+      - --denied-peer-ip=::1
+      - --denied-peer-ip=fc00::-fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+      - --denied-peer-ip=fe80::-febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+      - --allowed-peer-ip=${TURN_RELAY_IP:-}
+
+volumes:
+  pgdata:
+  mediadata:

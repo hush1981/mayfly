@@ -1,0 +1,8 @@
+# secrets — never commit
+.env
+*.env
+
+# the app lives in the android branches (checked out here as a worktree)
+mobile/
+
+.DS_Store

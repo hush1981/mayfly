@@ -1,0 +1,1 @@
+ALTER TABLE friendships ADD COLUMN IF NOT EXISTS last_contact_at TIMESTAMPTZ;

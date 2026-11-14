@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<title>Datenschutzerklärung · Mayfly</title>
+<meta name="description" content="Datenschutzerklärung für die Mayfly-App, den Server mayfly.paul42.de und diese Website.">
+<link rel="icon" type="image/png" href="/site/icon-64.png">
+<link rel="stylesheet" href="/site/site.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/"><img src="/site/icon-64.png" alt="" width="28" height="28"><span>Mayfly</span></a>
+    <nav><a href="/">Startseite</a><a href="/#datenschutz">Was der Server weiß</a></nav>
+  </div>
+</header>
+
+<main class="wrap legal">
+<h1>Datenschutzerklärung</h1>
+<p class="sub">Für die App Mayfly, den Server <code>mayfly.paul42.de</code> und diese Website. Stand: 14.&nbsp;November&nbsp;2026.</p>
+
+<p>Mayfly ist so gebaut, dass der Server möglichst wenig über dich erfährt: Inhalte werden auf deinem Handy Ende-zu-Ende verschlüsselt, der Server kann sie nicht lesen. Diese Erklärung beschreibt, welche Daten trotzdem anfallen, wofür, wie lange, und welche Rechte du hast. Wer einen eigenen Mayfly-Server betreibt, ist für diesen selbst verantwortlich; diese Erklärung gilt nur für den Server <code>mayfly.paul42.de</code>.</p>
+
+<h2>1. Verantwortlicher</h2>
+<p>Paul Ruebsamen<br>
+Anschrift und Telefon: siehe <a href="https://imprint.paul42.de/" rel="noopener">Impressum</a><br>
+E-Mail: <a href="mailto:kontakt@paul42.de">kontakt@paul42.de</a></p>
+<p>Mayfly ist ein privates, nicht kommerzielles Projekt. Es gibt keinen Datenschutzbeauftragten, weil keine Pflicht dazu besteht.</p>
+
+<h2>2. Diese Website</h2>
+<p>Die Website setzt keine Cookies, nutzt kein Tracking und keine Analysedienste und lädt keine Schriften, Skripte oder Bilder von fremden Servern. Die QR-Codes werden in deinem Browser erzeugt.</p>
+<p>Beim Aufruf überträgt dein Browser technisch bedingt deine IP-Adresse und die üblichen Header (z.&nbsp;B. Browserkennung). Weder der Reverse Proxy noch der Mayfly-Server speichern sie in Zugriffsprotokollen. Das Protokoll des Servers enthält nur Zeitpunkt, Methode, die aufgerufene Route (ohne IDs), Statuscode und Antwortzeit; es wird nach Größe rotiert und umfasst meist nur wenige Tage. Kurzzeitig im Arbeitsspeicher gehalten wird die IP-Adresse für die Begrenzung von Anfragen (siehe Abschnitt&nbsp;6).</p>
+<p>Links zu F-Droid, ntfy, Google Play, GitHub oder „Sponsor me a beer“ führen zu fremden Seiten mit eigenen Datenschutzerklärungen. „APK laden“ leitet zur Paketquelle <code>fdroid.paul42.de</code> weiter (Abschnitt&nbsp;8).</p>
+<p><b>Rechtsgrundlage:</b> Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;f DSGVO (berechtigtes Interesse an einer funktionierenden, sicheren Website).</p>
+
+<h2>3. Konto in der App</h2>
+<p>Für ein Konto speichert der Server:</p>
+<ul>
+  <li>Benutzername, Zeitpunkt der Registrierung</li>
+  <li>Passwort, nur als Argon2id-Hash (das Passwort selbst kennt der Server nicht)</li>
+  <li>deinen öffentlichen Schlüssel (der private bleibt auf deinem Handy)</li>
+  <li>optional dein Profilbild. Es ist <b>nicht</b> Ende-zu-Ende verschlüsselt und nur für Freunde und Mitglieder gemeinsamer Gruppen abrufbar.</li>
+  <li>einen Zähler für die Abmeldung aller Sitzungen nach einem Passwortwechsel</li>
+  <li>optional die Push-Adresse deines Verteilers (Abschnitt&nbsp;7)</li>
+  <li>den Hash deines Zustell-Schlüssels für Sealed Sender (der Schlüssel selbst geht nur verschlüsselt an deine Freunde)</li>
+</ul>
+<p>Mayfly fragt nie nach Telefonnummer, E-Mail-Adresse, Klarnamen oder Adressbuch.</p>
+<p><b>Rechtsgrundlage:</b> Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;b DSGVO (Bereitstellung des Dienstes, den du nutzt).</p>
+
+<h2>4. Freunde, Gruppen, Blockierungen</h2>
+<p>Damit Nachrichten nur zwischen Freunden fließen, speichert der Server, wer mit wem befreundet ist (mit offenen Anfragen), wen du blockiert hast, und wer in welcher Gruppe ist oder eingeladen wurde (mit Einladendem). Gespeichert werden außerdem Name und Bild von Gruppen; beide sind nicht Ende-zu-Ende verschlüsselt. Wann du mit wem zuletzt Kontakt hattest, speichert der Server nicht; die Reihenfolge der Freundesliste berechnet die App auf deinem Handy.</p>
+<p>Diese Daten bleiben gespeichert, bis du die Freundschaft beendest, die Blockierung aufhebst, die Gruppe verlässt oder dein Konto löschst.</p>
+<p><b>Rechtsgrundlage:</b> Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;b DSGVO.</p>
+
+<h2>5. Momente, Nachrichten, Stories, Anrufe</h2>
+<p>Fotos, Videos, Sprachnachrichten, Texte, Bildtexte, Reaktionen und Lesebestätigungen werden auf deinem Handy verschlüsselt. Der Server sieht davon nur, was er für die Zustellung braucht:</p>
+<ul>
+  <li>Empfänger, Zeitpunkt, ungefähre Größe und Art (Foto, Video, Sprachnachricht)</li>
+  <li>den Absender nur in Gruppenchats, bei Stories und bei Freunden, die noch eine ältere App-Version ohne Sealed Sender haben</li>
+  <li>bei Stories: dass du eine gepostet hast und für welche Freunde sie freigegeben ist</li>
+  <li>dass ein Moment geöffnet wurde, damit er gelöscht werden kann</li>
+</ul>
+<p><b>Speicherdauer:</b> Momente werden nach dem Öffnen gelöscht, alles andere (Momente, Stories, Nachrichten, Gruppen-Momente) spätestens nach 24&nbsp;Stunden. Dein Chatverlauf und gespeicherte Momente liegen nur verschlüsselt auf deinem Handy.</p>
+<p><b>Anrufe</b> sind Ende-zu-Ende verschlüsselt (WebRTC). Standardmäßig laufen sie über das Relay (TURN-Server) auf demselben Server, damit dein Gesprächspartner deine IP-Adresse nicht sieht. Das Relay verarbeitet dabei die IP-Adressen und Ports beider Geräte und die Datenmenge und schreibt Verbindungsbeginn und -ende mit diesen Adressen in sein Protokoll. Dieses wird nach Größe rotiert und umfasst meist nur wenige Tage. Die Zugangsdaten für das Relay sind kurzlebig und enthalten nicht deine Benutzer-ID. Schaltest du im Profil „IP-Adresse bei Anrufen verbergen“ aus, verbinden sich die Geräte möglichst direkt und sehen gegenseitig ihre IP-Adressen.</p>
+<p><b>Rechtsgrundlage:</b> Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;b DSGVO.</p>
+
+<h2>6. Schutz vor Missbrauch</h2>
+<p>Um Anmeldeversuche, Spam und Überlastung zu begrenzen, zählt der Server Anfragen pro IP-Adresse beziehungsweise pro Konto. Diese Zähler liegen nur im Arbeitsspeicher und verfallen nach höchstens einer Stunde Inaktivität; sie werden nicht auf die Festplatte geschrieben. Außerdem gelten die auf der Startseite genannten Mengengrenzen pro Person.</p>
+<p><b>Rechtsgrundlage:</b> Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;f DSGVO (berechtigtes Interesse an einem sicheren, für alle nutzbaren Dienst).</p>
+
+<h2>7. Push-Benachrichtigungen</h2>
+<p>Mayfly nutzt keine Google-Dienste. Benachrichtigungen laufen optional über UnifiedPush mit einem Verteiler deiner Wahl, zum Beispiel ntfy. Der Server speichert dazu die Push-Adresse, die dein Verteiler vergibt, und schickt bei neuen Momenten, Nachrichten, Anfragen und Anrufen eine <b>leere</b> Nachricht dorthin. Der Betreiber des Push-Dienstes (bei ntfy standardmäßig der öffentliche Dienst ntfy.sh) erfährt dadurch, wann ein Weckruf kommt, sowie die IP-Adresse unseres Servers und deines Handys, aber nicht, von wem oder was. Für diesen Dienst gilt dessen eigene Datenschutzerklärung; du kannst in ntfy einen eigenen Server eintragen oder ganz auf Push verzichten (dann schaut die App etwa alle 15&nbsp;Minuten selbst nach).</p>
+<p><b>Rechtsgrundlage:</b> Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;a DSGVO (du schaltest Push selbst ein und kannst es jederzeit wieder abschalten).</p>
+
+<h2>8. Download und Updates</h2>
+<p>Die App gibt es über die eigene F-Droid-Paketquelle <code>fdroid.paul42.de</code>, die auf einem gemieteten Server der Hetzner Online GmbH in der EU läuft. Beim Laden der App oder der Paketliste verarbeitet dieser Server technisch bedingt deine IP-Adresse. Die App fragt außerdem beim Mayfly-Server die neueste Versionsnummer ab (<code>/version</code>), ohne dabei Kontodaten zu senden.</p>
+<p><b>Rechtsgrundlage:</b> Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;f DSGVO.</p>
+
+<h2>9. Daten nur auf deinem Handy</h2>
+<p>Chatverlauf, gespeicherte Momente, dein privater Schlüssel, Spitznamen, beste Freunde und die Reihenfolge der Freundesliste, Stummschaltungen und dein Geburtstag bleiben auf deinem Handy, Verlauf und Schlüssel verschlüsselt. Die App braucht Zugriff auf Kamera und Mikrofon für Momente, Sprachnachrichten und Anrufe und auf Benachrichtigungen; Fotos aus der Galerie liest sie nur, wenn du sie auswählst. Ortsdaten (EXIF) werden aus jedem Foto entfernt, bevor es dein Handy verlässt. Die App enthält keine Werbung, keine Tracker und keine Absturzberichte an Dritte.</p>
+
+<h2>10. Hosting, Sicherungen, Empfänger</h2>
+<p>Der Mayfly-Server läuft auf eigener Hardware in Deutschland. Vom Server werden täglich Sicherungen erstellt, die vor dem Verlassen des Servers verschlüsselt werden und auf eigenen Backup-Servern liegen, darunter ein gemieteter Server der Hetzner Online GmbH in der EU. Sie werden in der Regel nach spätestens zwei Monaten gelöscht. Inhalte bleiben auch in Sicherungen Ende-zu-Ende verschlüsselt.</p>
+<p>Daten werden nicht verkauft, nicht für Werbung genutzt und nicht an Dritte weitergegeben, außer an die oben genannten Dienstleister oder wenn eine gesetzliche Pflicht besteht. Eine Übermittlung in Länder außerhalb der EU findet durch uns nicht statt; für den Push-Dienst deiner Wahl gilt Abschnitt&nbsp;7. Es gibt keine automatisierte Entscheidungsfindung und kein Profiling.</p>
+
+<h2>11. Konto löschen</h2>
+<p>Unter <i>Profil → Konto löschen</i> löschst du dein Konto. Konto, Profilbild, Freundschaften, Gruppenmitgliedschaften, Blockierungen, Push-Adresse und noch nicht abgeholte Momente und Nachrichten werden sofort vom Server entfernt. Was in Sicherungen steckt, verschwindet mit deren Ablauf (Abschnitt&nbsp;10). Was deine Freunde auf ihren Handys gespeichert haben, kann der Server nicht löschen.</p>
+
+<h2>12. Deine Rechte</h2>
+<p>Du hast das Recht auf Auskunft (Art.&nbsp;15 DSGVO), Berichtigung (Art.&nbsp;16), Löschung (Art.&nbsp;17), Einschränkung der Verarbeitung (Art.&nbsp;18), Datenübertragbarkeit (Art.&nbsp;20) und Widerspruch gegen Verarbeitungen auf Grundlage berechtigter Interessen (Art.&nbsp;21). Eine Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen (Art.&nbsp;7 Abs.&nbsp;3). Schreib dafür an die E-Mail-Adresse oben und nenne deinen Benutzernamen. Da Mayfly keine E-Mail-Adressen kennt, kann es sein, dass du nachweisen musst, dass dir das Konto gehört (zum Beispiel über eine Nachricht aus der App an den Dev-Code).</p>
+<p>Du kannst dich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel bei der zuständigen: Der Landesbeauftragte für den Datenschutz und die Informationsfreiheit Rheinland-Pfalz, Hintere Bleiche&nbsp;34, 55116 Mainz, <a href="https://www.datenschutz.rlp.de/" rel="noopener">datenschutz.rlp.de</a>.</p>
+
+<h2>13. Änderungen</h2>
+<p>Wenn Mayfly neue Funktionen bekommt, die andere Daten betreffen, wird diese Erklärung angepasst. Es gilt die jeweils hier veröffentlichte Fassung.</p>
+</main>
+
+<footer class="wrap foot">
+  <p><a href="/">Startseite</a> · <a href="https://imprint.paul42.de/" rel="noopener">Impressum</a></p>
+</footer>
+</body>
+</html>
